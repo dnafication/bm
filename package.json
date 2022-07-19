@@ -1,20 +1,19 @@
 {
-	"name": "unicorn-fun-cli",
-	"version": "0.0.0",
-	"description": "My awesome command-line tool",
+	"name": "bm-cli",
+	"version": "0.0.1",
+	"description": "bookmark manager CLI",
 	"license": "MIT",
-	"repository": "YOUR-GITHUB-USERNAME/unicorn-fun-cli",
+	"repository": "dnafication/bm-cli",
 	"author": {
-		"name": "YOUR NAME",
-		"email": "YOUR EMAIL",
-		"url": "YOUR WEBSITE"
+		"name": "Dina",
+		"email": "basu.dins@gmail.com"
 	},
 	"type": "module",
 	"bin": {
-		"unicorn-fun": "cli.js"
+		"bm": "cli.js"
 	},
 	"engines": {
-		"node": ">=12"
+		"node": ">=16"
 	},
 	"scripts": {
 		"test": "xo && ava"
@@ -30,7 +29,9 @@
 	],
 	"dependencies": {
 		"meow": "^9.0.0",
-		"unicorn-fun": "^0.0.0"
+		"minisearch": "5.0.0",
+		"open": "8.4.0",
+		"prompts": "2.4.2"
 	},
 	"devDependencies": {
 		"ava": "^3.15.0",
