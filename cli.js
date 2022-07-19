@@ -58,11 +58,20 @@ if (results.length > 1) {
 		type: "autocomplete",
 		message: "Which one?",
 		name: "pick",
+		suggest: (input, choices) =>
+			Promise.resolve(
+				choices.filter((c) =>
+					c.title.toLowerCase().includes(input.toLowerCase())
+				)
+			),
 		choices: results.map((result) => ({
 			title: result.title,
 			value: result,
 			description: result.description,
 		})),
+		onState: ({ aborted, exited }) => {
+			if (aborted || exited) process.exit(0);
+		},
 	});
 
 	if (answer.pick) {
