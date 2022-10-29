@@ -2,7 +2,7 @@
 import meow from "meow";
 import open from "open";
 import prompts from "prompts";
-import { ms } from "./lib/bookmarks.js";
+import { Bookmark } from "./lib/bookmarks.js";
 
 const cli = meow(
 	`
@@ -22,7 +22,7 @@ const cli = meow(
 		flags: {
 			in: {
 				type: "string",
-				default: "google chrome",
+				default: "",
 			},
 			incognito: {
 				type: "boolean",
@@ -35,7 +35,10 @@ const cli = meow(
 // console.log(cli.input);
 // console.log(cli.flags);
 
-const results = ms.search(cli.input[0], {
+const bm = new Bookmark();
+await bm.init();
+
+const results = bm.ms.search(cli.input[0], {
 	fields: ["title", "url"],
 	fuzzy: 0.2,
 	prefix: true,
@@ -76,9 +79,14 @@ if (results.length > 1) {
 
 	if (answer.pick) {
 		await openLink(answer.pick);
+		process.exit(0);
 	}
+	process.exit(0);
 }
 
 if (results.length === 1) {
 	await openLink(results[0]);
+	process.exit(0);
 }
+
+console.log("No results found");
